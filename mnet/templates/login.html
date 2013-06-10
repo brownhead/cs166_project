@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}Login{% endblock %}
+{% block path %}&rarr; <a href="/login">login</a>{% endblock %}
+{% block includes %}
+    <script type="text/javascript">
+    $(function() {
+        $("#username").focus()
+    })
+    </script>
+{% endblock %}
+{% block content %}
+    <div class="login_block">
+        <form method="post">
+            <div class="fields">
+                <div>
+                    <label for="username">Username</label>
+                    <input type="text" name="username" id="username" />
+                </div>
+                <div>
+                    <label for="password">Password</label>
+                    <input type="password" name="password" id="password" />
+                </div>
+            </div>
+            <div class="login_button">
+                <input type="submit" value="Login">
+            </div>
+        </form>
+    </div>
+{% endblock %}
