@@ -27,20 +27,30 @@ class User:
         return False
 
     def get_id(self):
-        return self.e_mail
+        return self.user_id
 
     def __init__(self, *args, **kwargs):
-        for i in _db_fields:
+        for i in User._db_fields:
             setattr(self, i, None)
 
-        for i, j in zip(_db_fields, args):
+        for i, j in zip(User._db_fields, args):
             setattr(self, i, j)
 
         for k, v in kwargs.values():
-            if k in _db_fields:
+            if k in User._db_fields:
                 setattr(self, k, v)
             else:
                 raise TypeError("%s has no field %s" % (type(self).__name__, k))
+
+    @staticmethod
+    def fetch(user_id):
+        db.execute("SELECT * FROM users WHERE user_id=%s", (user_id, ))
+        raw_results = db.fetchone()
+
+        if raw_results is None:
+            return None
+        else:
+            return User(*raw_results)
 
 # Set up the login manager
 from flask.ext.login import LoginManager
@@ -50,7 +60,5 @@ login_manager.login_message = None
 login_manager.init_app(app)
 
 @login_manager.user_loader
-def load_user(email):
-	db.execute("SELECT * FROM users WHERE e_mail=%s", (email, ))
-	raw_results = db.fetchone()
-	return User(*raw_results)
+def load_user(user_id):
+    return User.fetch(user_id)
