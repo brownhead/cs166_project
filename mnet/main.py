@@ -2,6 +2,7 @@
 
 # Create the application
 from mnet.application import app
+import auth
 
 app.secret_key = 'SUPER SECRET KEY (dont tell)'
 
