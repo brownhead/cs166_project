@@ -30,9 +30,9 @@ def register():
                                     flask.request.form[user_fields[8].lower()], \
                                     flask.request.form[user_fields[9].lower()], \
                                     flask.request.form[user_fields[10].lower()], \
-                                    '0'))
+                                    '0', '0', '0', '0'))
                 except Exception as e:
-                        flask.flash('UID taken')
+                        flask.flash('UID already in use')
                         return flask.render_template("register.html", user_fields = user_fields)
 
                 # register new users likes
@@ -51,6 +51,6 @@ def register():
                                 continue
                         db.execute('INSERT INTO prefers VALUES (%s, %s)', (flask.request.form[user_fields[3].lower()], genre_ids[lg]))
 
-                return str('Sucessfully registered')
+                return flask.redirect(flask.url_for('login'))
 
 

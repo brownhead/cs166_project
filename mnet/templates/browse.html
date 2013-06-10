@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}Browse{% endblock %}
+{% block path %}&rarr; <a href="/browse">Browse</a>{% endblock %}
+{% block content %}
+    <div class="browse_block">
+      <br/>
+      <table class="video_list">
+	<thead>
+	  <tr>
+	    <th>Title</th>
+	  </tr>
+	</thead>
+	<tbody>
+	{% for video in videos %}
+	  <tr>
+	    <td><a href="{{ url_for('movie_info', movie_id=video[0]) }}">{{ video[1] }}</a></td>
+	  </tr>
+	{% endfor %}
+	</tbody>
+      </table>
+    </div>
+{% endblock %}

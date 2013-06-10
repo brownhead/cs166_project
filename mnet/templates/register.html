@@ -1,7 +1,7 @@
-{# {% extends "base.html" %} #}
-{# {% block title %}Login{% endblock %} #}
-{# {% block path %}&rarr; <a href="/login">login</a>{% endblock %} #}
-{# {% block content %} #}
+{% extends "base.html" %}
+{% block title %}Register{% endblock %}
+{% block path %}&rarr; <a href="/register">register</a>{% endblock %}
+{% block content %}
     <div class="register_block">
         <form method="post" action="{{ url_for('register') }}">
             <div class="fields">
@@ -17,4 +17,4 @@
             </div>
         </form>
     </div>
-{# {% endblock %} #}
+{% endblock %}
