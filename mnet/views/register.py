@@ -18,7 +18,7 @@ def register():
 
                 # register the new user
                 try:
-                        db.execute('INSERT INTO users VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)', \
+                        db.execute('INSERT INTO users VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)', \
                                    (flask.request.form[user_fields[3].lower()], \
                                     flask.request.form[user_fields[4].lower()], \
                                     flask.request.form[user_fields[0].lower()], \
@@ -32,6 +32,7 @@ def register():
                                     flask.request.form[user_fields[10].lower()], \
                                     '0', '0', '0', '0'))
                 except Exception as e:
+                        print str(e)
                         flask.flash('UID already in use')
                         return flask.render_template("register.html", user_fields = user_fields)
 
