@@ -25,7 +25,7 @@
 	<div id="topbar">
 		{% if current_user.is_authenticated() %}
 		<div id="login_status">
-			You are logged in as <strong>{{ current_user.id }}</strong> (<a href="/logout">logout</a>)
+			You are logged in as <strong>{{ current_user.user_id }}</strong> (<a href="/logout">logout</a>)
 		</div>
 		{% else %}
 		<div id="login_status">
