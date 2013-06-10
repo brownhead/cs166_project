@@ -1,14 +1,14 @@
-{% extends "base.html" %}
-{% block title %}Login{% endblock %}
-{% block path %}&rarr; <a href="/login">login</a>{% endblock %}
-{% block content %}
+{# {% extends "base.html" %} #}
+{# {% block title %}Login{% endblock %} #}
+{# {% block path %}&rarr; <a href="/login">login</a>{% endblock %} #}
+{# {% block content %} #}
     <div class="register_block">
-        <form method="post">
+        <form method="post" action="{{ url_for('register') }}">
             <div class="fields">
                 {% for field_name in user_fields %}
                 <div>
-                    <label for="{% field_name | lower %}">{% field_name %}</label>
-                    <input type="text" name="{% field_name | lower %}" id="{% field_name | lower %}" />
+                    <label for="{{ field_name | lower }}">{{ field_name }}</label>
+                    <input type="text" name="{{ field_name | lower }}" id="{{ field_name | lower }}" />
                 </div>
                 {% endfor %}
             </div>
@@ -17,4 +17,4 @@
             </div>
         </form>
     </div>
-{% endblock %}
+{# {% endblock %} #}

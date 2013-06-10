@@ -1,1 +1,1 @@
-import home, login
+import home, login, register

@@ -3,6 +3,8 @@
 # Create the application
 from mnet.application import app
 
+app.secret_key = 'SUPER SECRET KEY (dont tell)'
+
 # Load up all of the views
 import mnet.views
 
