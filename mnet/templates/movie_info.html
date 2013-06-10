@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+{% block title %}Movie Info{% endblock %}
+{% block path %}&rarr; <a href="/browse">Movie Info</a>{% endblock %}
+{% block content %}
+    <div class="movie_info_block">
+      <span class="title">{{ info['title'] }}</span> - <span class="year">{{ info['year'] }}</span>
+      <br/>
+      
+      {% if info['series'] %}
+        {{ info['series'] }}, Season {{ info['season'] }} Episode {{ info['episode'] }}
+        <br/>
+      {% endif %}
+
+      Written by: {{ info['authors'] }}
+
+      <br/>
+
+      Genre(s): {{ info['genre'] }}
+
+      <br/>
+
+      Watched {{ info['watch_count'] }} time(s)
+
+      <br/>
+      
+      Starring: 
+      <ul>
+	{% for star in info['stars'] %}
+	  <li>{{ star }}</li>
+	{% endfor %}
+      </ul>
+
+      <form method="POST" action="{{ url_for('movie_info', movie_id = movie_id) }}" id="watch_add_form">
+	<input type="button" onclick="button_press('online');" value="Watch online"> ${{ info['online_price'] }}
+	<br/>
+	<input type="button" onclick="button_press('dvd');" value="Add to cart"> ${{ info['dvd_price'] }}
+	<br/>
+	{% if info['likes'] %}
+	<input class="fave_button" type="button" onclick="button_press('fave_down');" value="Remove from favorites">
+	{% else %}
+	<input class="fave_button" type="button" onclick="button_press('fave_up');" value="Add to favorites">
+	{% endif %}
+	<input type="hidden" id="hiddinput" name="hiddinput">
+	<input type="hidden" id="hidden_comment" name="hidden_comment">
+      </form>
+
+      Overall rating: {{ info['overall_rating'] }}
+      <br/>
+      Follower rating: {{ info['follower_rating'] }}
+      <br/>
+      Your rating: 
+      <select id="rating">
+	<option value="None"{% if info['user_rating'] == 0 %}selected{% endif %}></option>
+	<option value="1" {% if info['user_rating'] == 1 %}selected{% endif %}>1</option>
+	<option value="2" {% if info['user_rating'] == 2 %}selected{% endif %}>2</option>
+	<option value="3" {% if info['user_rating'] == 3 %}selected{% endif %}>3</option>
+	<option value="4" {% if info['user_rating'] == 4 %}selected{% endif %}>4</option>
+	<option value="5" {% if info['user_rating'] == 5 %}selected{% endif %}>5</option>
+      </select>
+      <input type="button" value="Submit" onclick="button_press(document.getElementById('rating').value);">
+
+      <br/>
+      
+      <ul>
+        {% for comment in comments %}
+	  <li>
+            {{ comment['name'] }} - {{ comment['time'] }}
+	    <br/>
+	    <div style="margin-left: 10px;">{{ comment['content'] }}</div>
+	  </li>
+        {% endfor %}
+      </ul>
+
+      Add a comment:
+      <br/>
+      <textarea id="comment"></textarea>
+      <br/>
+      <input type="button" value="Submit" onclick="button_press('comment');">
+
+      <script type="text/javascript">
+    	function button_press(hiddinput_value) {
+	    document.getElementById('hiddinput').value = hiddinput_value;
+	    document.getElementById('hidden_comment').value = document.getElementById('comment').value;
+
+	    document.getElementById('watch_add_form').submit();
+	}
+      </script>
+    </div>
+{% endblock %}
