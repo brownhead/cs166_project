@@ -1,8 +1,9 @@
 import flask
-from flask.ext.login import login_user, logout_user, current_user
+from flask.ext.login import login_user, logout_user, current_user, login_required
 from mnet.application import app, db
 
 @app.route("/movie_info/<movie_id>", methods=['GET', 'POST'])
+@login_required
 def movie_info(movie_id):
     if flask.request.method == 'POST' and current_user:
         if flask.request.form['hiddinput'] == 'online':
@@ -94,7 +95,7 @@ def movie_info(movie_id):
     if video[7]:
         info['episode'] = video[7]
         db.execute('''SELECT season.season_number, series.title
-                     FROM season, series 
+                     FROM season, series
                      WHERE season.season_id = %s AND series.series_id = season.series_id''', (video[8]))
         results = db.fetchall()[0]
         info['season'] = results[0]
@@ -105,7 +106,7 @@ def movie_info(movie_id):
     results = db.fetchall()
     comments = []
     for comment in results:
-        comments.append({ 'name' : comment[0] + ' ' + comment[1], 
+        comments.append({ 'name' : comment[0] + ' ' + comment[1],
                           'time' : comment[2],
                           'content' : comment[3] })
 
