@@ -1,11 +1,10 @@
 {% extends "base.html" %}
 {% block title %}Movie Info{% endblock %}
-{% block path %}&rarr; <a href="/browse">Browse</a>{% endblock %}
 {% block content %}
     <div class="movie_info_block">
       <span class="title">{{ info['title'] }}</span> - <span class="year">{{ info['year'] }}</span>
       <br/>
-      
+
       {% if info['series'] %}
         {{ info['series'] }}, Season {{ info['season'] }} Episode {{ info['episode'] }}
         <br/>
@@ -22,8 +21,8 @@
       Watched {{ info['watch_count'] }} time(s)
 
       <br/>
-      
-      Starring: 
+
+      Starring:
       <ul>
 	{% for star in info['stars'] %}
 	  <li>{{ star }}</li>
@@ -48,7 +47,7 @@
       <br/>
       Follower rating: {{ info['follower_rating'] }}
       <br/>
-      Your rating: 
+      Your rating:
       <select id="rating">
 	<option value="None"{% if info['user_rating'] == 0 %}selected{% endif %}></option>
 	<option value="1" {% if info['user_rating'] == 1 %}selected{% endif %}>1</option>
@@ -60,7 +59,7 @@
       <input type="button" value="Submit" onclick="button_press(document.getElementById('rating').value);">
 
       <br/>
-      
+
       <ul>
         {% for comment in comments %}
 	  <li>

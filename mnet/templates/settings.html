@@ -1,6 +1,5 @@
 {% extends "base.html" %}
 {% block title %}Admin{% endblock %}
-{% block path %}&rarr; <a href="/admin">Admin</a>{% endblock %}
 {% block content %}
 <div class="settings_block">
   <span class="settings_header">Manage permissions:</span>
@@ -31,7 +30,7 @@
     </select>
     <input type="submit" value="Change">
   </form>
-  
+
   <br/>
   <span class="settings_header">Follow user:</span>
   <form method="POST" action="{{ url_for('follow_user') }}">
@@ -56,7 +55,7 @@
   <br/>
   <span class="settings_header">Manage balance:</span>
   <form method="POST" action="{{ url_for('increase_balance') }}">
-    Current balance: {{ balance }} 
+    Current balance: {{ balance }}
     <br/>
     <label>Increase balance: <input type="text" name="balance"></label>
     <input type="submit" value="Add to balance">
