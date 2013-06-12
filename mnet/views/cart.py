@@ -11,12 +11,14 @@ def cart():
     videos = model.get_items()
 
     db.execute(
-        "SELECT title,dvd_price FROM video WHERE video_id IN (%s)",
+        "SELECT title,dvd_price FROM video WHERE video_id IN (%s)" %
         (",".join(str(i) for i in videos), )
     )
+    videos_info = db.fetchall()
+    app.logger.debug("%s", ",".join(str(i) for i in videos))
 
     items = []
-    for video_id, video_info in zip(videos, db.fetchall()):
+    for video_id, video_info in zip(videos, videos_info):
         items.append({
             "video_id": video_id,
             "title": video_info[0],

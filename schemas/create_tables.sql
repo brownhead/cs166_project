@@ -122,7 +122,6 @@ CREATE TABLE played (
 drop table written CASCADE;
 CREATE TABLE written (
 	video_id INTEGER NOT NULL,
-	author_id INTEGER NOT NULL,
 	PRIMARY KEY(video_id, author_id),
 	FOREIGN KEY(video_id) REFERENCES video,
 	FOREIGN KEY(author_id) REFERENCES author
@@ -138,14 +137,15 @@ CREATE TABLE likes (
 );
 drop table orders CASCADE;
 CREATE TABLE orders (
-	order_id SERIAL NOT NULL,
+	order_id BIGINT NOT NULL,
 	video_id INTEGER NOT NULL,
+	PRIMARY KEY(order_id, video_id),
 	FOREIGN KEY(order_id) REFERENCES ordersmeta,
 	FOREIGN KEY(video_id) REFERENCES video
 );
 drop table ordersmeta CASCADE;
 CREATE TABLE ordersmeta (
-	order_id SERIAL PRIMARY KEY,
+	order_id BIGINT NOT NULL PRIMARY KEY AUTO_INCREMENT,
 	user_id VARCHAR(9) NOT NULL,
 	completed DATE,
 	FOREIGN KEY(user_id) REFERENCES users
