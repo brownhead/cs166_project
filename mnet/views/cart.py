@@ -41,7 +41,7 @@ def cart():
             price_sum = sum(i["dvd_price"] for i in items)
 
             if price_sum > balance:
-                flash("You don't have enough money in your account.", category = "error")
+                flask.flash("You don't have enough money in your account.", category = "error")
             else:
                 db.execute('UPDATE users SET balance = balance - %s WHERE user_id = %s', (price_sum, current_user.get_id()))
                 model.complete_order()
