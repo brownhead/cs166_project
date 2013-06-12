@@ -68,3 +68,12 @@ body {
 .settings_header, .admin_header {
     font-weight: bold;
 }
+
+.x_button {
+    color: white;
+    border: 1px solid black;
+    border-radius: 50%;
+    background-color: red;
+    font-size: 16px;
+    font-weight: bold;
+}
