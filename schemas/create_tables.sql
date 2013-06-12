@@ -131,6 +131,7 @@ drop table likes CASCADE;
 CREATE TABLE likes (
 	user_id VARCHAR(9) NOT NULL,
 	video_id INTEGER NOT NULL,
+	timestamp TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	PRIMARY KEY(user_id, video_id),
 	FOREIGN KEY(video_id) REFERENCES video,
 	FOREIGN KEY(user_id) REFERENCES users
@@ -170,3 +171,11 @@ CREATE TABLE comment (
 	FOREIGN KEY(user_id) REFERENCES users,
 	FOREIGN KEY(video_id) REFERENCES video
 );
+drop table watched CASCADE;
+CREATE TABLE watched (
+       user_id VARCHAR(9) NOT NULL PRIMARY KEY,
+       video_id VARCHAR(9) NOT NULL,
+       timestamp TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+       FOREIGN KEY(user_id) REFERENCES users,	
+       FOREIGN KEY(video_id) REFERENCES video
+);	
