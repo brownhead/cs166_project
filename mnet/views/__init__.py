@@ -1,1 +1,1 @@
-import home, login, register, browse, movie_info, admin
+import home, login, register, browse, movie_info, admin, settings
