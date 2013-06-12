@@ -7,7 +7,20 @@ from mnet.application import app, db
 def movie_info(movie_id):
     if flask.request.method == 'POST' and current_user:
         if flask.request.form['hiddinput'] == 'online':
+            # get current balance
+            db.execute('SELECT balance FROM users WHERE user_id = %s', (current_user.get_id()))
+            balance = db.fetchall()[0][0]
+
+            # get online price
+            db.execute('SELECT online_price FROM video WHERE video_id = %s', (movie_id))
+            price = db.fetchall()[0][0]
+
+            if balance < price:
+                flask.flash('You do not have enough money to watch this movie online', 'error')
+                return flask.redirect(flask.url_for('movie_info', movie_id = movie_id))
+
             db.execute('INSERT INTO watched (user_id, video_id) VALUES (%s, %s)', (current_user.get_id(), movie_id))
+            db.execute('UPDATE users, video SET users.balance = (users.balance - video.online_price) WHERE users.user_id = %s AND video.video_id = %s', (current_user.get_id(), movie_id))
         elif flask.request.form['hiddinput'] == 'dvd':
             # TODO: add video to cart
             pass
