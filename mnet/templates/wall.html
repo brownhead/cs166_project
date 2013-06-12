@@ -3,7 +3,7 @@
 {% block path %}&rarr; <a href="/admin">Admin</a>{% endblock %}
 {% block content %}
 <div class="wall_block">
-  <ul>
+  <ul id="wall_list">
     {% for event in events %}
     <li>
       At {{ event['time'] }} {{ event['user'] }} {{ event['verb'] }} <a href="{{ url_for('movie_info', movie_id = event['id']) }}">{{ event['title'] }}</a> {{ event['suffix'] }}
