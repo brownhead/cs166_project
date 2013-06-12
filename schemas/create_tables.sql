@@ -3,7 +3,7 @@ drop table users CASCADE;
 CREATE TABLE users (
 	user_id VARCHAR(9) NOT NULL PRIMARY KEY,
 	password VARCHAR(36) NOT NULL,
-	first_name VARCHAR(40) NOT NULL, 
+	first_name VARCHAR(40) NOT NULL,
 	middle_name VARCHAR(40),
 	last_name VARCHAR(40) NOT NULL,
 	e_mail VARCHAR(40) NOT NULL,
@@ -27,7 +27,7 @@ CREATE TABLE super_user (
 drop table follow CASCADE;
 CREATE TABLE follow (
 	user_id_to VARCHAR(9) NOT NULL ,
-	user_id_from VARCHAR(9) NOT NULL, 
+	user_id_from VARCHAR(9) NOT NULL,
 	follow_time TIMESTAMP NOT NULL,
 	PRIMARY KEY(user_id_to,user_id_from),
 	FOREIGN KEY(user_id_to) REFERENCES users,
@@ -138,11 +138,16 @@ CREATE TABLE likes (
 );
 drop table orders CASCADE;
 CREATE TABLE orders (
-	order_id SERIAL PRIMARY KEY,
+	order_id SERIAL NOT NULL,
 	video_id INTEGER NOT NULL,
+	FOREIGN KEY(order_id) REFERENCES ordersmeta,
+	FOREIGN KEY(video_id) REFERENCES video
+);
+drop table ordersmeta CASCADE;
+CREATE TABLE ordersmeta (
+	order_id SERIAL PRIMARY KEY,
 	user_id VARCHAR(9) NOT NULL,
 	completed DATE,
-	FOREIGN KEY(video_id) REFERENCES video,
 	FOREIGN KEY(user_id) REFERENCES users
 );
 drop table rate CASCADE;

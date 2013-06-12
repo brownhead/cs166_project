@@ -1,6 +1,7 @@
 import flask
 from flask.ext.login import login_user, logout_user, current_user, login_required
 from mnet.application import app, db
+from mnet.models.shoppingcart import ShoppingCart
 
 @app.route("/movie_info/<movie_id>", methods=['GET', 'POST'])
 @login_required
@@ -9,8 +10,8 @@ def movie_info(movie_id):
         if flask.request.form['hiddinput'] == 'online':
             db.execute('INSERT INTO watched (user_id, video_id) VALUES (%s, %s)', (current_user.get_id(), movie_id))
         elif flask.request.form['hiddinput'] == 'dvd':
-            # TODO: add video to cart
-            pass
+            cart = ShoppingCart(current_user.get_id())
+            cart.add_item(movie_id)
         elif flask.request.form['hiddinput'] == 'fave_up':
             db.execute('INSERT INTO likes (user_id, video_id) VALUES (%s, %s)', (current_user.get_id(), movie_id))
         elif flask.request.form['hiddinput'] == 'fave_down':
