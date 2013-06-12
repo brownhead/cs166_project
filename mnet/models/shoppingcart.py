@@ -43,3 +43,14 @@ class ShoppingCart:
         )
 
         return [i[0] for i in db.fetchall()]
+
+    def clear_cart(self):
+        db.execute(
+            "DELETE FROM orders WHERE order_id=%s", (self.order_id, )
+        )
+
+    def complete_order(self):
+        db.execute(
+            "UPDATE ordersmeta SET completed=NOW() WHERE order_id=%s",
+            (self.order_id, )
+        )
