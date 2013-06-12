@@ -3,6 +3,63 @@
 {% block path %}&rarr; <a href="/admin">Admin</a>{% endblock %}
 {% block content %}
 <div class="settings_block">
-  settings page
+  <span class="settings_header">Manage permissions:</span>
+  <form method="POST" action="{{ url_for('change_fave_perm') }}">
+    Favorites:
+    <select name="favorites">
+      <option value="private" {% if perms['fave'] == 0 %}selected{% endif %}>Private</option>
+      <option value="friends" {% if perms['fave'] == 1 %}selected{% endif %}>Friends only</option>
+      <option value="public" {% if perms['fave'] == 2 %}selected{% endif %}>Public</option>
+    </select>
+    <input type="submit" value="Change">
+  </form>
+  <form method="POST" action="{{ url_for('change_rate_perm') }}">
+    Rated:
+    <select name="favorites">
+      <option value="private" {% if perms['rank'] == 0 %}selected{% endif %}>Private</option>
+      <option value="friends" {% if perms['rank'] == 1 %}selected{% endif %}>Friends only</option>
+      <option value="public" {% if perms['rank'] == 2 %}selected{% endif %}>Public</option>
+    </select>
+    <input type="submit" value="Change">
+  </form>
+  <form method="POST" action="{{ url_for('change_watch_perm') }}">
+    Watched:
+    <select name="favorites">
+      <option value="private" {% if perms['watch'] == 0 %}selected{% endif %}>Private</option>
+      <option value="friends" {% if perms['watch'] == 1 %}selected{% endif %}>Friends only</option>
+      <option value="public" {% if perms['watch'] == 2 %}selected{% endif %}>Public</option>
+    </select>
+    <input type="submit" value="Change">
+  </form>
+  
+  <br/>
+  <span class="settings_header">Follow user:</span>
+  <form method="POST" action="{{ url_for('follow_user') }}">
+    <label>User ID: <input type="text" name="userid"></label>
+    <input type="submit" value="Follow">
+  </form>
+
+  <br/>
+  <span class="settings_header">Manage following:</span>
+  <form method="POST" action="{{ url_for('stop_follow_user') }}">
+    <label>User ID: <input type="text" name="userid"></label>
+    <input type="submit" value="Unfollow">
+  </form>
+
+  <br/>
+  <span class="settings_header">Manage preferred genres:</span>
+  <form method="POST" action="{{ url_for('change_genres') }}">
+    <label>Preferred genres: <input type="text" name="genres" value="{{ genres }}"></label>
+    <input type="submit" value="Change">
+  </form>
+
+  <br/>
+  <span class="settings_header">Manage balance:</span>
+  <form method="POST" action="{{ url_for('increase_balance') }}">
+    Current balance: {{ balance }} 
+    <br/>
+    <label>Increase balance: <input type="text" name="balance"></label>
+    <input type="submit" value="Add to balance">
+  </form>
 </div>
 {% endblock %}
