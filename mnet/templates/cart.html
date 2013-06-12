@@ -16,5 +16,18 @@
             {% endfor %}
             </table>
         </div>
+        <div>
+            <form method="POST" id="cart_form">
+                <input type="hidden" id="action" name="action">
+                <a href="#" class="button" onclick="trigger_action('clear')">Clear Shopping Cart</a>
+                <a href="#" class="button" onclick="trigger_action('checkout')">Checkout</a>
+            </form>
+        </div>
     </div>
+    <script type="text/javascript">
+        function trigger_action(name) {
+            $("#action")[0].value = name;
+            $("#cart_form").submit();
+        }
+      </script>
 {% endblock %}

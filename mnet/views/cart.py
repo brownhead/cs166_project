@@ -29,4 +29,28 @@ def cart():
 
     app.logger.debug("Query returned\n%s", repr(items))
 
+    if flask.request.method == "POST":
+        action = flask.request.form.get("action")
+
+        app.logger.info("Cart action %s triggered.", action)
+
+        if action == "checkout":
+            db.execute("SELECT balance FROM users WHERE user_id=%s", (current_user.get_id(), ))
+            balance = int(db.fetchone()[0])
+
+            price_sum = sum(i["dvd_price"] for i in items)
+
+            if price_sum > balance:
+                flash("You don't have enough money in your account.", category = "error")
+            else:
+                db.execute('UPDATE users SET balance = balance - %s WHERE user_id = %s', (price_sum, current_user.get_id()))
+                model.complete_order()
+                flask.flash("Your order has been placed!", category = "message")
+
+            return flask.redirect(flask.url_for("cart"))
+        elif action == "clear":
+            model.clear_cart()
+            flask.flash("Cart has been cleared.", category = "message")
+            return flask.redirect(flask.url_for("cart"))
+
     return flask.render_template("cart.html", items = items)
