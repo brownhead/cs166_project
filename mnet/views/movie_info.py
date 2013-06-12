@@ -24,7 +24,10 @@ def movie_info(movie_id):
             db.execute('UPDATE users, video SET users.balance = (users.balance - video.online_price) WHERE users.user_id = %s AND video.video_id = %s', (current_user.get_id(), movie_id))
         elif flask.request.form['hiddinput'] == 'dvd':
             cart = ShoppingCart(current_user.get_id())
-            cart.add_item(movie_id)
+            try:
+                cart.add_item(movie_id)
+            except:
+                flask.flash("Movie already in cart.", category = "error")
         elif flask.request.form['hiddinput'] == 'fave_up':
             db.execute('INSERT INTO likes (user_id, video_id) VALUES (%s, %s)', (current_user.get_id(), movie_id))
         elif flask.request.form['hiddinput'] == 'fave_down':
