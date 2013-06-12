@@ -11,6 +11,14 @@
 			$(this).hide()
 			$(this).delay(200 * index).fadeIn(300)
 		})
+
+		links = document.getElementsByTagName("a")
+		for (i in links) {
+			if (location.pathname == links[i].pathname &&
+				links[i].className.indexOf("primary_exempt") == -1) {
+				links[i].className += " primary"
+			}
+		}
 	})
 	</script>
 	{% block includes %}{% endblock %}
@@ -23,15 +31,13 @@
 			{% block path %}{% endblock %}
 		</span>
 	</div>
-	<div id="navbar">
-	  <ul>
-	    <li><a href="/home">Home</a></li>
-	    <li><a href="/wall">Wall</a></li>
-	    <li><a href="/browse">Browse</a></li>
-	    <li><a href="/cart">Cart</a></li>
-	    <li><a href="/settings">Settings</a></li>
-	    <li><a href="/admin">Admin</a></li>
-	  </ul>
+	<div class="button-group">
+	<a class="button" href="/home">Home</a>
+	<a class="button" href="/wall">Wall</a>
+	<a class="button" href="/browse">Browse</a>
+	<a class="button" href="/cart">Cart</a>
+	<a class="button" href="/settings">Settings</a>
+	<a class="button" href="/admin">Admin</a>
 	</div>
 	<div id="topbar">
 		{% if current_user.is_authenticated() %}
