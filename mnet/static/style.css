@@ -41,7 +41,39 @@ body {
 
 #topbar > #flashes > .error { background-color: #FDBEB5; }
 
+/* nav bar */
+#navbar > ul {
+    list-style: none;
+}
+
+#navbar > ul > li {
+    border: 2px solid #b0d4e3;
+    border-radius: 3px;
+    display: inline;
+    padding: 5px;
+}
+
+#navbar > ul > li > a {
+    color: #88bacf;
+    font-weight: bold;
+    text-decoration: none;
+}
+
 /* movie info page */
 .title {
+    font-weight: bold;
+}
+
+/* settings and admin pages */
+.settings_header, .admin_header {
+    font-weight: bold;
+}
+
+.x_button {
+    color: white;
+    border: 1px solid black;
+    border-radius: 50%;
+    background-color: red;
+    font-size: 16px;
     font-weight: bold;
 }
