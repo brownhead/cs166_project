@@ -1,22 +1,33 @@
 body {
-	background: #b0d4e3;
-	background: -moz-linear-gradient(top,  #b0d4e3 0%, #88bacf 100%);
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#b0d4e3), color-stop(100%,#88bacf));
-	background: -webkit-linear-gradient(top,  #b0d4e3 0%,#88bacf 100%);
-	background: -o-linear-gradient(top,  #b0d4e3 0%,#88bacf 100%);
-	background: -ms-linear-gradient(top,  #b0d4e3 0%,#88bacf 100%);
-	background: linear-gradient(to bottom,  #b0d4e3 0%,#88bacf 100%);
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b0d4e3', endColorstr='#88bacf',GradientType=0 );
+    background-color: #FFFFFF;
+	 /* Gradient*/
+    /* IE10 */
+    background-image: -ms-linear-gradient(top left, #FFFFFF 0%, #D9EBFF 100%);
+
+    /* Mozilla Firefox */
+    background-image: -moz-linear-gradient(top left, #FFFFFF 0%, #D9EBFF 100%);
+
+    /* Opera */
+    background-image: -o-linear-gradient(top left, #FFFFFF 0%, #D9EBFF 100%);
+
+    /* Webkit (Safari/Chrome 10) */
+    background-image: -webkit-gradient(linear, left top, right bottom, color-stop(0, #FFFFFF), color-stop(1, #D9EBFF));
+
+    /* Webkit (Chrome 11+) */
+    background-image: -webkit-linear-gradient(top left, #FFFFFF 0%, #D9EBFF 100%);
+
+    /* Proposed W3C Markup */
+    background-image: linear-gradient(top left, #FFFFFF 0%, #D9EBFF 100%);
 }
 
 #container {
-	background-color: rgba(255, 255, 255, 0.9);
+	/*background-color: rgba(255, 255, 255, 0.9);*/
     color: #333;
     font-size: 12pt;
     padding: 8px 30px;
     font-family: Palatino, Georgia, serif;
     min-width: 400px;
-    max-width: 1080px;
+    max-width: 580px;
     margin: 0px auto;
 }
 
@@ -40,24 +51,6 @@ body {
 #topbar > #flashes > .message { background-color: #FFFFD5; }
 
 #topbar > #flashes > .error { background-color: #FDBEB5; }
-
-/* nav bar */
-#navbar > ul {
-    list-style: none;
-}
-
-#navbar > ul > li {
-    border: 2px solid #b0d4e3;
-    border-radius: 3px;
-    display: inline;
-    padding: 5px;
-}
-
-#navbar > ul > li > a {
-    color: #88bacf;
-    font-weight: bold;
-    text-decoration: none;
-}
 
 /* movie info page */
 .title {

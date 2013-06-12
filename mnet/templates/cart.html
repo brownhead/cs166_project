@@ -12,14 +12,21 @@
                     <td>{{ i["title"] }}</td>
                     <td>${{ i["dvd_price"]}}</td>
                 </tr>
+            {% else %}
+                <tr>
+                    <td>
+                        (Nothing in your cart)
+                    </td>
+                    <td></td>
+                </tr>
             {% endfor %}
             </table>
         </div>
         <div>
             <form method="POST" id="cart_form">
                 <input type="hidden" id="action" name="action">
-                <a href="#" class="button" onclick="trigger_action('clear')">Clear Shopping Cart</a>
-                <a href="#" class="button" onclick="trigger_action('checkout')">Checkout</a>
+                <a href="#" class="button primary_exempt" onclick="trigger_action('clear')">Clear Shopping Cart</a>
+                <a href="#" class="button primary_exempt" onclick="trigger_action('checkout')">Checkout</a>
             </form>
         </div>
     </div>
