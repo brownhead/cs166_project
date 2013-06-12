@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% block title %}Admin{% endblock %}
+{% block path %}&rarr; <a href="/admin">Admin</a>{% endblock %}
+{% block content %}
+{% if not error %}
+    <div class="admin_block">
+      <div class="new_movie">
+	<span class="admin_header">Register new movie:</span>
+	<form method="POST" action="{{ url_for('new_movie') }}">
+	  <label>Title: <input type="text" name="title"></label>
+	  <br/>
+	  <label>Year: <input type="text" name="year"></label>
+	  <br/>
+	  <label>Online price: <input type="text" name="online_price"></label>
+	  <br/>
+	  <label>DVD price: <input type="text" name="dvd_price"></label>
+	  <br/>
+	  <label>Genre: <input type="text" name="genre"></label>
+	  <br/>
+	  <label>Starring: <input type="text" name="starring"></label>
+	  <br/>
+	  <label>Writers: <input type="text" name="writers"></label>
+	  <br/>
+	  <label>Episode: <input type="text" name="episode"></label>
+	  <br/>
+	  <label>Series: <input type="text" name="series"></label>
+	  <br/>
+	  <label>Season number: <input type="text" name="season"></label>
+	  <br/>
+	  <input type="submit" value="Submit">
+        </form>
+
+	<br/>
+	<span class="admin_header">Register new series:</span>
+	<form method="POST" action="{{ url_for('new_series') }}">
+	  <label>Title: <input type="text" name="series_title"></label>
+	  <br/>
+	  <input type="submit" value="Submit">
+	</form>
+      </div>
+
+      <br/>
+      <span class="admin_header">Manage movies:</span>
+      {% for video in videos %}
+      <form method="POST" action="{{ url_for('delete_movie', movie_id = video[0]) }}">
+	<input type="submit" value="X" class="x_button">
+	<a href="/movie_info/{{ video[0] }}">{{ video[1] }}</a>
+      </form>
+      {% endfor %}
+
+      <br/>
+      <span class="admin_header">Manage users:</span>
+      <form method="POST" action="{{ url_for('delete_user') }}">
+	<label>User ID: <input type="text" name="userid"></label>
+	<input type="submit" value="Delete">
+      </form>
+    </div>
+
+    <br/>
+    <span class="admin_header">Manage comments:</span>
+    {% for comment in comments %}
+    <br/>
+    <form method="POST" action="{{ url_for('delete_comment', comment_id = comment['id']) }}">
+      <input type="submit" value="X" class="x_button">
+      At {{ comment['time'] }}, {{ comment['name'] }} commented on {{ comment['title'] }}:
+      <div style="margin-left: 10px;">{{ comment['content'] }}</div>
+    </form>
+    {% endfor %}
+{% endif %}
+{% endblock %}

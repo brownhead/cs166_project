@@ -86,7 +86,8 @@ def movie_info(movie_id):
     info['follower_rating'] = db.fetchall()[0][0]
 
     db.execute('SELECT rating FROM rate WHERE user_id = %s AND video_id = %s', (current_user.get_id(), movie_id))
-    user_rating = db.fetchall()[0][0]
+    results = db.fetchall()
+    user_rating = results[0][0] if len(results) > 0 else None
     if user_rating:
         info['user_rating'] = int(user_rating)
     else:
